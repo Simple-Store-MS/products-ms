@@ -5,6 +5,7 @@ import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Pagination } from '../common/dto/pagination.dto';
+import { ValidateProductsDto } from './dto/validate-products.dto';
 
 @Controller('products')
 export class ProductsController {
@@ -33,5 +34,10 @@ export class ProductsController {
   @MessagePattern('DELETE_PRODUCT')
   remove(@Payload('id') id: number) {
     return this.productsService.remove(id);
+  }
+
+  @MessagePattern('VALIDATE_PRODUCTS')
+  validateProducts(@Payload() input: ValidateProductsDto) {
+    return this.productsService.validateProducts(input);
   }
 }
